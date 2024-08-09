@@ -127,12 +127,12 @@ def transfer(request):
         return Response({'error': 'Одинаковые пользователи в Отправителе и Получателе'}, status=status.HTTP_200_OK)
 
     try:
-        sender_balance = get_object_or_404(Balance, user=sender)
+        sender_balance = Balance.objects.get(user=sender)
     except Balance.DoesNotExist:
         sender_balance = Balance.objects.create(user=request.user, amount=0)
 
     try:
-        receiver_balance = get_object_or_404(Balance, user=receiver)
+        receiver_balance = Balance.objects.get(user=receiver)
     except Balance.DoesNotExist:
         receiver_balance = Balance.objects.create(user=receiver, amount=0)
 

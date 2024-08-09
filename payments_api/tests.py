@@ -65,7 +65,7 @@ class PaymentsAPITestCase(TestCase):
         receiver = User.objects.create_user(username='receiver', password='Receiverpassword123')
         Balance.objects.create(user=receiver, amount=0.00)
 
-        data = {"amount": 50.00, "receiver_id": 2}
+        data = {"amount": 50.0, "receiver_id": 2}
         response = self.client.post(reverse('payments_api:transfer'), data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['new_sender_balance'], 50.00)
