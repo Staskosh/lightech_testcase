@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Кабинет пользователя</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+    <style>
+       body {
+          position: relative;
+        }
+        .carousel-inner > .item > img{
+          margin:auto;
+          width:100%
+        }
+    </style>
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <center>
+    <h2>Ваш баланс {{ balance }} руб</h2>
+  </center>
+
+  <hr/>
+
+  <br/>
+  <br/>
+
+  <div class="container">
+   <table class="table table-responsive">
+      <tr>
+        <th></th>
+        <th>Отправитель</th>
+        <th>Получатель</th>
+        <th>Сумма</th>
+        <th>Дата и время создания</th>
+      </tr>
+
+      {% for transaction in transactions %}
+        <tr>
+          <td><img src="{{product.image.url}}" alt="{{product.name}}" height="50px"></td>
+          <td>{{transaction.sender}}</td>
+          <td>{{transaction.receiver}}</td>
+          <td>{{transaction.amount}}</td>
+          <td>{{transaction.created_at}}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

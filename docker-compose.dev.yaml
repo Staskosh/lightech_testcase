@@ -1,0 +1,37 @@
+version: '3.9.2'
+
+services:
+  django:
+    container_name: payments-django
+    build:
+      context: .
+    restart: unless-stopped
+    command: >
+      sh -c "./manage.py makemigrations && 
+             ./manage.py migrate &&
+             ./manage.py collectstatic --noinput &&
+             ./manage.py runserver 0.0.0.0:8000"
+    ports:
+    - 8000:8000
+    volumes:
+      - /home/user_payments/web
+      - static_volume:/home/user_payments/web/staticfiles
+    env_file:
+      - .env
+    depends_on:
+      - db
+
+  db:
+    container_name: payments-postgres
+    image: postgres:9.6-alpine
+    restart: unless-stopped
+    ports:
+      - 543:5432
+    volumes:
+      - postgres_volume:/var/lib/postgresql/data/
+    env_file:
+      - .env
+
+volumes:
+  postgres_volume:
+  static_volume:
