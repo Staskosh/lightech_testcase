@@ -10,8 +10,8 @@ try:
         dbname="${POSTGRES_DB}",
         user="${POSTGRES_USER}",
         password="${POSTGRES_PASSWORD}",
-        host=${POSTGRES_HOST}",
-        port=${POSTGRES_PORT}",,
+        host="${POSTGRES_HOST}",
+        port="${POSTGRES_PORT}",
     )
 except psycopg2.OperationalError:
     sys.exit(-1)
